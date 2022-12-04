@@ -11,7 +11,7 @@ class UserController {
         return ProfileResponse("username")
     }
 
-    @GetMapping("profile")
+    @GetMapping("points")
     fun points() {
 
     }
