@@ -1,8 +1,8 @@
 package me.lullaby.tradlinxbackend.domain.user
 
-import org.springframework.data.jpa.repository.JpaRepository
-import java.util.Optional
+import org.springframework.data.repository.CrudRepository
+import java.util.*
 
-interface UserRepository: JpaRepository<User, Long> {
-    fun findByUserid(userid: String): Optional<User>
+interface UserRepository: CrudRepository<User, Long> {
+    fun findByAccount(account: String): Optional<User>
 }
