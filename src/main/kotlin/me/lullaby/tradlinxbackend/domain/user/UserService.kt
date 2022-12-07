@@ -19,7 +19,6 @@ class UserService(
             .orElseThrow { Error("사용자를 찾을 수 없습니다. (account = ${account})") }
     }
 
-
 }
 
 data class CreateUserCommand(

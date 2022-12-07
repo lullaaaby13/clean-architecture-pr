@@ -1,12 +1,15 @@
 package me.lullaby.tradlinxbackend.assertions
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import me.lullaby.tradlinxbackend.application.authenticate.dto.SignUpCommand
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
@@ -18,14 +21,23 @@ class AuthAssertionTests {
     @Autowired
     private lateinit var mockMvc: MockMvc
 
-    @Autowired
-    private lateinit var objectMapper: ObjectMapper
-
-    @DisplayName("회원 가입 성공")
+    @DisplayName("헬스 체크")
     @Test
-    fun sing_up_success() {
-        mockMvc.perform(회원가입_요청("test", "1234", "apple"))
+    fun health_check_success() {
+        mockMvc.perform(
+            MockMvcRequestBuilders.get("/health-check")
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+        )
             .andExpect(MockMvcResultMatchers.status().isOk)
+            .andDo(MockMvcResultHandlers.print())
+    }
+
+    //@DisplayName("회원 가입 성공")
+    @Test
+    fun `회원 가입 성공`() {
+        mockMvc.perform(회원가입_요청("test", "1234", "apple"))
+            .andExpect(MockMvcResultMatchers.status().isCreated)
             .andDo(MockMvcResultHandlers.print())
     }
 

@@ -21,7 +21,6 @@ class AuthController (
     @PostMapping("signup")
     fun signup(@Valid @RequestBody command: SignUpCommand) {
         authenticationService.signUp(command)
-
     }
 
     @PostMapping("signin")
