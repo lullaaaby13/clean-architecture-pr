@@ -14,14 +14,14 @@ data class User (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
-    val id: Long?,
+    val id: Long? = null,
 
     @Column(name = "account")
-    val account: String,
+    var account: String,
 
     @Column(name = "password")
-    val password: String,
+    var password: String,
 
     @Column(name = "nickname")
-    val nickname: String,
+    var nickname: String,
 )

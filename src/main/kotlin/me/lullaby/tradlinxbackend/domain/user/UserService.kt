@@ -1,12 +1,18 @@
 package me.lullaby.tradlinxbackend.domain.user
 
-import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 @Service
 class UserService(
     private val userRepository: UserRepository
 ) {
+
+    @Transactional(readOnly = true)
+    fun findUser(account: String): Optional<User> {
+        return this.userRepository.findByAccount(account)
+    }
 
     @Transactional
     fun createUser(command: CreateUserCommand): User {
@@ -14,11 +20,10 @@ class UserService(
         return this.userRepository.save(user)
     }
 
-    fun getUser(account: String): User {
-        return this.userRepository.findByAccount(account)
-            .orElseThrow { Error("사용자를 찾을 수 없습니다. (account = ${account})") }
+    @Transactional
+    fun deleteUser(userId: Long) {
+        this.userRepository.deleteById(userId)
     }
-
 }
 
 data class CreateUserCommand(

@@ -55,4 +55,9 @@ class UserAssertionTests {
             .andDo(MockMvcResultHandlers.print())
     }
 
+    fun `프로필_조회`() {
+        MockMvcRequestBuilders.get("/profile")
+            .contentType(MediaType.APPLICATION_JSON)
+    }
+
 }

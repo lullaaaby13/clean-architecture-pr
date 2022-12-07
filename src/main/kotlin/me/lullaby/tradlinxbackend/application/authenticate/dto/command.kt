@@ -20,3 +20,10 @@ data class SignInCommand(
     @field:NotBlank
     val pw: String,
 )
+
+data class SingOutCommand(
+    @field:NotBlank
+    val userid: String,
+    @field:NotBlank
+    val pw: String,
+)
